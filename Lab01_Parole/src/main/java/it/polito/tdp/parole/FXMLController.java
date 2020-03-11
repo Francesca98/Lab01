@@ -19,6 +19,16 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 	
 	Parole elenco ;
+    @FXML
+    private TextArea txtTime;
+
+   
+
+    @FXML
+    private Button btnCancella;
+
+
+    
 
     @FXML
     private ResourceBundle resources;
@@ -59,8 +69,14 @@ public class FXMLController {
     	String string = word.substring(1, word.length());
     	String neword =n.toUpperCase() + string.toLowerCase();
     	if(!elenco.getElenco().contains(neword))
-    	{elenco.addParola(neword);
+    	{
+    		double start = System.nanoTime();
+    		elenco.addParola(neword);
+    		double stop = System.nanoTime();
+    		double time = stop - start;
+    		txtTime.setText("Tempo di inserimento "+ word +":     "+Double.toString( time)+"\n");
     	}
+    	
 
     	
     	for(Object s : elenco.getElenco().stream().sorted().collect(Collectors.toList()))
@@ -81,6 +97,27 @@ public class FXMLController {
     void doReset(ActionEvent event) {
       elenco.reset();
       txtResult.clear();
+  	double start = System.nanoTime();
+  	double stop = System.nanoTime();
+	double time = stop - start;
+	txtTime.setText("Tempo di reset " + Double.toString( time)+"\n");
+    }
+    
+    
+    @FXML
+    void handleCancella(ActionEvent event) {
+   String word = txtResult.getSelectedText();
+
+   elenco.cancella(word);
+   txtResult.clear();
+   for(String s : elenco.getElenco())
+    txtResult.appendText(s.toString()+"\n");
+   
+   double start = System.nanoTime();
+ 	double stop = System.nanoTime();
+	double time = stop - start;
+	txtTime.setText("Tempo di cancellazione "+ word +" "+ Double.toString( time) +"\n");
+	
     }
 
     @FXML

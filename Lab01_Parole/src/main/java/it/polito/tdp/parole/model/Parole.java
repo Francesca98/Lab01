@@ -23,4 +23,7 @@ public class Parole {
 		this.parole.clear();
 	}
 
+	public void cancella(String s) {
+		this.parole.remove(s);
+	}
 }
