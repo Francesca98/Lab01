@@ -1,6 +1,8 @@
 package it.polito.tdp.parole;
 
+
 import it.polito.tdp.parole.model.Parole;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import javafx.scene.control.TextField;
 public class FXMLController {
 	
 	Parole elenco ;
+
     @FXML
     private TextArea txtTime;
 
@@ -51,7 +54,7 @@ public class FXMLController {
     @FXML
     void doInsert(ActionEvent event) {
     	String word = this.txtParola.getText();
-    	//System.out.print(word + "\n");
+    
     	if(word.length() == 0)
     	{
     		txtResult.appendText("Devi inserire un nome" + "\n");
@@ -69,12 +72,15 @@ public class FXMLController {
     	String string = word.substring(1, word.length());
     	String neword =n.toUpperCase() + string.toLowerCase();
     	if(!elenco.getElenco().contains(neword))
-    	{
-    		double start = System.nanoTime();
-    		elenco.addParola(neword);
-    		double stop = System.nanoTime();
-    		double time = stop - start;
-    		txtTime.setText("Tempo di inserimento "+ word +":     "+Double.toString( time)+"\n");
+			{
+    	
+
+    		   double start = System.nanoTime();
+    		   this.elenco.addParola(neword);
+    		 	double stop = System.nanoTime();
+    			double time = stop - start;
+    			txtTime.setText("Tempo di inserzione "+ word +" "+ Double.toString( time) +"\n");
+    	
     	}
     	
 
